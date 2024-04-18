@@ -48,8 +48,14 @@ def extractionAvocats(url):
         # variable qui vont stocker les données des balise voulu
         nom = avocat.find("h3", class_='nom-prenom').text.strip()
         adresse = avocat.find("span", class_='adresse').text.strip()
-        telephone = avocat.find("span", class_='telephone').text.strip()
-        email = avocat.find("span", class_='email').a.text.strip()
+        try:
+            telephone = avocat.find("span", class_='telephone').text.strip()
+        except AttributeError:
+            telephone = ""
+        try:
+            email = avocat.find("span", class_='email').a.text.strip()
+        except AttributeError:
+            email = ""
 
         # nettoyage des variable avec regex pour nettoyage des espaces
         # Enlever les espaces supplémentaires & le T pour le telephone
